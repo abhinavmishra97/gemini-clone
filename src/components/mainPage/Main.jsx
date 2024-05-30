@@ -25,22 +25,49 @@ const Main = () => {
               <p>How can I help you today?</p>
             </div>
             <div className="cards">
-                <div className="card" onClick={() => {
-                    setInput('Suggest beautiful places to see on an upcoming road trip');
-                    onSent();
-                }}>
+              <div
+                className="card"
+                onClick={() => {
+                  const prom =
+                    "Suggest beautiful places to see on an upcoming road trip";
+                  setInput(prom);
+                  onSent(prom);
+                }}
+              >
                 <p>Suggest beautiful places to see on an upcoming road trip</p>
                 <img src={assets.compass_icon} alt="img" />
               </div>
-              <div className="card">
+              <div
+                className="card"
+                onClick={() => {
+                  const prom = "Briefly summarise this concept urban pplanning";
+                  setInput(prom);
+                  onSent(prom);
+                }}
+              >
                 <p>Briefly summarise this concept urban pplanning</p>
                 <img src={assets.bulb_icon} alt="img" />
               </div>
-              <div className="card">
+              <div
+                className="card"
+                onClick={() => {
+                  const prom =
+                    "Brainstrom team bonding activites for our work retreat";
+                  setInput(prom);
+                  onSent(prom);
+                }}
+              >
                 <p>Brainstrom team bonding activites for our work retreat</p>
                 <img src={assets.message_icon} alt="img" />
               </div>
-              <div className="card">
+              <div
+                className="card"
+                onClick={() => {
+                  const prom = "Improve the readability of the following code";
+                  setInput(prom);
+                  onSent(prom);
+                }}
+              >
                 <p>Improve the readability of the following code</p>
                 <img src={assets.code_icon} alt="img" />
               </div>
@@ -63,7 +90,7 @@ const Main = () => {
               ) : (
                 <p
                   dangerouslySetInnerHTML={{
-                    __html: DOMPurify.sanitize(resultData||""),
+                    __html: DOMPurify.sanitize(resultData || ""),
                   }}
                 ></p>
               )}
@@ -77,7 +104,8 @@ const Main = () => {
               onChange={(e) => setInput(e.target.value)}
               value={input}
               type="text"
-              placeholder="Enter a prompt here"
+                placeholder="Enter a prompt here"
+                onKeyDown={(event) => { if (event.key === 'Enter') onSent() }  }          
             />
             <div>
               <img src={assets.gallery_icon} alt="gallery" />
