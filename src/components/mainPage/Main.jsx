@@ -2,6 +2,7 @@ import React from 'react'
 import './Main.css'
 import { assets } from '../../assets/assets/assets'
 import { Context } from '../../context/Context'
+import DOMPurify from "dompurify";
 import { useContext } from 'react'
 
 const Main = () => {
@@ -24,7 +25,10 @@ const Main = () => {
               <p>How can I help you today?</p>
             </div>
             <div className="cards">
-              <div className="card">
+                <div className="card" onClick={() => {
+                    setInput('Suggest beautiful places to see on an upcoming road trip');
+                    onSent();
+                }}>
                 <p>Suggest beautiful places to see on an upcoming road trip</p>
                 <img src={assets.compass_icon} alt="img" />
               </div>
@@ -43,16 +47,28 @@ const Main = () => {
             </div>{" "}
           </>
         ) : (
-            <div className="result">
-                <div className="result-title">
-                    <img src={assets.user_icon} alt="img" />
-                    <p>{recentPrompt}</p>
-                          </div>
-                          <div className="result-data">
-                              <img src={assets.gemini_icon} alt="img" />
-                              <p dangerouslySetInnerHTML={{__html:resultData}}></p>
-                          </div>
+          <div className="result">
+            <div className="result-title">
+              <img src={assets.user_icon} alt="img" />
+              <p>{recentPrompt}</p>
             </div>
+            <div className="result-data">
+              <img src={assets.gemini_icon} alt="img" />
+              {loading ? (
+                <div className="loader">
+                  <hr />
+                  <hr />
+                  <hr />
+                </div>
+              ) : (
+                <p
+                  dangerouslySetInnerHTML={{
+                    __html: DOMPurify.sanitize(resultData||""),
+                  }}
+                ></p>
+              )}
+            </div>
+          </div>
         )}
 
         <div className="main-bottom">

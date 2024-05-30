@@ -51,8 +51,7 @@ async function run(prompt) {
   const chatSession = model.startChat({
     generationConfig,
     safetySettings,
-    history: [
-    ],
+    history: [],
   });
 
   const result = await chatSession.sendMessage(prompt);
